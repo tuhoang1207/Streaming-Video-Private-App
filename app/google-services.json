@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "990355428150",
+    "project_id": "streamingvideoprivateapp-x",
+    "storage_bucket": "streamingvideoprivateapp-x.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:990355428150:android:1eb758827cefae56bb1997",
+        "android_client_info": {
+          "package_name": "com.example.streamingvideoprivateapp4"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPI9RZlOUMYrWOTWCmn3jYzRYqzIKc2bc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
