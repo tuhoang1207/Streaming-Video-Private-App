@@ -37,6 +37,7 @@
         app:srcCompat="@drawable/gradiant_bg" />
 
     <TextView
+        android:paddingBottom="24dp"
         android:id="@+id/trailer_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

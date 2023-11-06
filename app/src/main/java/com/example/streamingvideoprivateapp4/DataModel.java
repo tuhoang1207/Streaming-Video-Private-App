@@ -2,9 +2,11 @@ package com.example.streamingvideoprivateapp4;
 
 public class DataModel {
 
+    //Data của Trailer
     private String Ttitle;
     private String Turl;
     private String Tvid;
+
 
     public DataModel() {
     }

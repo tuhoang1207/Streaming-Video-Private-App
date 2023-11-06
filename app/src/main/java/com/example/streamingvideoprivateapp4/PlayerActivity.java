@@ -3,20 +3,14 @@ package com.example.streamingvideoprivateapp4;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-/*import androidx.media3.common.util.UnstableApi;
-import androidx.media3.exoplayer.ExoPlayer;*/
 
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-//import androidx.media3.extractor.mp4.Track;
 
-
-
-import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.SimpleExoPlayer;
-
+import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.ProgressiveMediaSource;
 import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
@@ -68,8 +62,7 @@ public class PlayerActivity extends AppCompatActivity {
         simpleExoPlayer = ExoPlayerFactory.newSimpleInstance(this,trackSelector);
         playerView.setPlayer(simpleExoPlayer);
 
-        DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(this,
-                Util.getUserAgent(this,getString(R.string.app_name)));
+        DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(this, Util.getUserAgent(this,getString(R.string.app_name)));
         MediaSource videoSource = new ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(Uri.parse(VIDEO_URL));
 
         simpleExoPlayer.prepare(videoSource);

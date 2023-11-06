@@ -3,6 +3,8 @@ package com.example.streamingvideoprivateapp4;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
@@ -26,8 +28,15 @@ public class MainActivity extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
+
+    //Cho Slider
     private List<DataModel> dataModels;
     private SliderAdapter sliderAdapter;
+
+    //Cho Featured
+    private List<DataFeatured> dataFeatureds;
+    private RecyclerView featuredRecyclerView;
+    private FeaturedAdapter featuredAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +61,52 @@ public class MainActivity extends AppCompatActivity {
 
         //Load data từ Firebase
         loadFirebaseForSlider();
+        loadFeaturedData();
 ;    }
+
+    /*private void loadData() {
+        loadFeaturedData();
+        loadMoviesData();
+    }*/
+
+    private void loadMoviesData() {
+
+    }
+
+    private void loadFeaturedData() {
+        //Load data featured từ Firebase
+        DatabaseReference FRef = database.getReference("featured");
+        featuredRecyclerView = findViewById(R.id.recyclerView2);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(RecyclerView.HORIZONTAL); //Set layout default là vertical
+        //Đảo thứ tự layout để data thêm vào sau xuất hiện trước
+        //Cụ thể khi thêm sẽ có thứ tự mặc định 0 1 2 3, đảo ngược lại sẽ xuất hiện 3 2 1 0
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+
+        featuredRecyclerView.setLayoutManager(layoutManager);
+
+        dataFeatureds = new ArrayList<>();
+        featuredAdapter = new FeaturedAdapter(dataFeatureds);
+        featuredRecyclerView.setAdapter(featuredAdapter);
+
+        FRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot contentSnapShot:snapshot.getChildren()){
+                    DataFeatured dataFeatured = contentSnapShot.getValue(DataFeatured.class);
+                    dataFeatureds.add(dataFeatured);
+                }
+                featuredAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 
     private void loadFirebaseForSlider() {
         myRef.child("trailer").addListenerForSingleValueEvent(new ValueEventListener() {

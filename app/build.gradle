@@ -53,17 +53,12 @@ dependencies {
     //Add Glide library
     implementation 'com.github.bumptech.glide:glide:4.16.0'
 
-    //Add Exoplayer library rồi sửa thành phiên bản đang sử dụng
-    implementation 'com.google.android.exoplayer:exoplayer:2.19.1'
+    //Add Exoplayer library rồi sửa thành phiên bản đang sử dụng (từ 2.19.1 trở lên là hỏng, xài phiên bản cũ)
+    implementation 'com.google.android.exoplayer:exoplayer:2.11.7'
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.11.7'
+    implementation 'com.google.android.exoplayer:exoplayer-dash:2.11.7'
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.11.7'
 
-    implementation 'com.google.android.exoplayer:exoplayer-core:2.19.1'
-    implementation 'com.google.android.exoplayer:exoplayer-dash:2.19.1'
-    implementation 'com.google.android.exoplayer:exoplayer-ui:2.19.1'
-    implementation 'com.google.android.exoplayer:exoplayer-hls:2.19.1'
-    // media3 formally exo Player
-    /*implementation 'androidx.media3:media3-exoplayer:1.1.1'
-    implementation 'androidx.media3:media3-exoplayer-dash:1.1.1'
-    implementation 'androidx.media3:media3-ui:1.1.1'*/
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
