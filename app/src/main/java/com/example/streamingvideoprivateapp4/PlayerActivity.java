@@ -68,7 +68,17 @@ public class PlayerActivity extends AppCompatActivity {
         simpleExoPlayer.prepare(videoSource);
         simpleExoPlayer.setPlayWhenReady(true);
 
+        //Fix lỗi sự cố của player tự tắt khi màn hình tắt
+        playerView.setKeepContentOnPlayerReset(true);
     }
+    //Fix lỗi khi nhấn home button thì player vẫn chạy ở background mà không tắt
+    @Override
+    protected void onStop() {
+        super.onStop();
+        simpleExoPlayer.release();
+    }
+    //Gọi sự kiện stop để fix. Khi gọi sự kiện ra thì dừng exoPlayer
+
 
     @Override
     protected void onDestroy() {

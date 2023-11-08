@@ -38,6 +38,12 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView featuredRecyclerView;
     private FeaturedAdapter featuredAdapter;
 
+    //Cho Series
+    private List<DataSeries> dataSeries;
+    private RecyclerView seriesRecyclerView;
+    private SeriesAdapter seriesAdapter;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,6 +110,39 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+
+        //Load Series adapter sau khi load Featured adapter
+        loadSeriesData();
+    }
+
+    private void loadSeriesData() {
+        DatabaseReference SRef = database.getReference("series");
+        seriesRecyclerView = findViewById(R.id.recyclerView3);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        seriesRecyclerView.setLayoutManager(layoutManager);
+
+        dataSeries = new ArrayList<>();
+        seriesAdapter = new SeriesAdapter(dataSeries);
+
+        seriesRecyclerView.setAdapter(seriesAdapter);
+        SRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot contentSnapShot:snapshot.getChildren()){
+                    DataSeries newDataSeries = contentSnapShot.getValue(DataSeries.class);
+                    dataSeries.add(newDataSeries);
+                }
+                seriesAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                //error code
             }
         });
     }
